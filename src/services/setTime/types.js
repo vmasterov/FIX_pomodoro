@@ -1,0 +1,2 @@
+export const WORK_CHANGE = 'SET_TIME/WORK_CHANGE';
+export const REST_CHANGE = 'SET_TIME/REST_CHANGE';

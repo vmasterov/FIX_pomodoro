@@ -1,0 +1,61 @@
+.SetTime.is-disabled {
+    opacity: 0.5;
+}
+
+.SetTime--restSessionTime {
+    text-align: right;
+}
+
+.SetTime-caption {
+    font-size: 25px;
+}
+
+.SetTime-wrapper > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.SetTime-time {
+    font-weight: 600;
+    font-size: 35px;
+}
+
+.SetTime-buttonContainer {
+    margin: 2px 0 0 7px;
+}
+
+.SetTime-button {
+    margin: 2px 0;
+    display: block;
+    width: 20px;
+    height: 12px;
+    font-size: 8px;
+    line-height: 12px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 991px) {
+    .SetTime-caption {
+        font-size: 18px;
+    }
+
+    .SetTime-time {
+        font-size: 30px;
+    }
+
+    .SetTime-button {
+        margin: 2px 1px;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        font-size: 10px;
+        line-height: 25px;
+    }
+}
+
+@media (max-width: 767px) {
+    .SetTime--restSessionTime {
+        margin-top: 20px;
+        text-align: left;
+    }
+}
