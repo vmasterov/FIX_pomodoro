@@ -5,7 +5,7 @@ class Button extends Component {
     render() {
         return (
             <button
-                className={`Timer-button Timer-button-${this.props.type}`}
+                className={'Timer-button Timer-button-' + this.props.type + (this.props.isStarted ? ' is-started' : '')}
                 onClick={this.props.click}
             >
                 {this.props.name}

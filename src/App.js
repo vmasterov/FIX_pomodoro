@@ -2,10 +2,11 @@ import React from 'react';
 import SetTime from "./components/setTime/SetTime";
 import Timer from "./components/timer/Timer";
 import {types} from "./services/helpers/timerTypes";
+import {connect} from "react-redux";
 
-function App() {
+function App(props) {
   return (
-      <div id="app" className="app isWorkSessionTheme">
+      <div id="app" className={'app' +  (props.isWorkSession ? ' isWorkSessionTheme' : ' isRestSessionTheme')}>
           <div className="container">
               <div className="row">
                   <div className="col-12 offset-0 col-xl-10 offset-xl-1">
@@ -35,4 +36,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        isWorkSession: state.setTime.isWorkSession
+    }
+};
+
+export default connect(mapStateToProps)(App);

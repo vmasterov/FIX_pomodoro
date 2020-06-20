@@ -1,4 +1,4 @@
-import {WORK_CHANGE, REST_CHANGE, COUNTDOWN} from "./types";
+import {WORK_CHANGE, REST_CHANGE, COUNTDOWN, RESET_TIMER, TOGGLE_START_BUTTON} from "./types";
 
 const initialState = {
     workSessionTime: {
@@ -11,18 +11,19 @@ const initialState = {
     },
     restSessionTime: {
         time: {
-            min: 5,
-            sec: 0
+            min: 0,
+            sec: 5
         },
         mini: 0,
         maxi: 10
     },
     countdown: {
         min: 0,
-        sec: 2
+        sec: 3
     },
     isWorkSession: true,
-    isSetTimeActive: true
+    isSetTimeActive: true,
+    isStartButton: true
 };
 
 export default (state = initialState, action) => {
@@ -41,10 +42,23 @@ export default (state = initialState, action) => {
 
         case COUNTDOWN:
             let countdownState = {...state};
-            countdownState.countdown = {...action.payload};
+            countdownState.countdown = {...action.payload.time};
+            countdownState.isWorkSession = action.payload.isWorkSession;
             countdownState.isSetTimeActive = false;
 
             return countdownState;
+
+        case TOGGLE_START_BUTTON:
+            let toggleStartState = {...state};
+            toggleStartState.isStartButton = action.payload;
+
+            return toggleStartState;
+
+        case RESET_TIMER:
+            let resetState = {...state};
+            resetState.isSetTimeActive = true;
+
+            return resetState;
 
         default:
             return state;
