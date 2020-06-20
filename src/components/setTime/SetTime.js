@@ -24,7 +24,7 @@ class SetTime extends Component {
 
     render() {
         return (
-            <div className={`SetTime SetTime--${this.props.type}`}>
+            <div className={'SetTime SetTime--' + this.props.type + (this.props.data.isSetTimeActive ? '' : ' is-disabled')}>
                 <div className="SetTime-caption">{this.props.caption}</div>
                 <div className="SetTime-wrapper">
                     <div className="SetTime-time">{beautyTime(this.props.data[this.props.type].time)}</div>
@@ -32,14 +32,22 @@ class SetTime extends Component {
                         <button
                             className="SetTime-button SetTime-button-more"
                             onClick={this.changeTimer}
-                            disabled={this.props.data[this.props.type].time.min >= this.props.data[this.props.type].maxi}
+                            disabled={
+                                (this.props.data[this.props.type].time.min >= this.props.data[this.props.type].maxi)
+                                ||
+                                !this.props.data.isSetTimeActive
+                            }
                         >
                             &#9650;
                         </button>
                         <button
                             className="SetTime-button SetTime-button-less"
                             onClick={this.changeTimer}
-                            disabled={this.props.data[this.props.type].time.min <= this.props.data[this.props.type].mini}
+                            disabled={
+                                (this.props.data[this.props.type].time.min <= this.props.data[this.props.type].mini)
+                                ||
+                                !this.props.data.isSetTimeActive
+                            }
                         >
                             &#9660;
                         </button>

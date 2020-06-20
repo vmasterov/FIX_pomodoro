@@ -1,4 +1,8 @@
 export const setTimer = (time, isPlus = true) => {
+    if (time.min === 0 && time.sec === 0) {
+        return time;
+    }
+
     if (isPlus) {
         if (time.sec++ === 59) {
             time.sec = 0;

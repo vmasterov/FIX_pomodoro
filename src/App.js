@@ -1,7 +1,7 @@
 import React from 'react';
 import SetTime from "./components/setTime/SetTime";
 import Timer from "./components/timer/Timer";
-import {types} from "./components/setTime/timerTypes";
+import {types} from "./services/helpers/timerTypes";
 
 function App() {
   return (

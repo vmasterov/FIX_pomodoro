@@ -1,4 +1,4 @@
-import {WORK_CHANGE, REST_CHANGE/*, WORK_BUTTON_CHANGE, REST_BUTTON_CHANGE*/} from "./types";
+import {WORK_CHANGE, REST_CHANGE, COUNTDOWN} from "./types";
 
 const initialState = {
     workSessionTime: {
@@ -17,13 +17,19 @@ const initialState = {
         mini: 0,
         maxi: 10
     },
+    countdown: {
+        min: 0,
+        sec: 2
+    },
+    isWorkSession: true,
+    isSetTimeActive: true
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case WORK_CHANGE:
             let workChangeState = {...state};
-            workChangeState.workSessionTime.time = {...action.payload};
+            workChangeState.workSessionTime.time = workChangeState.countdown = {...action.payload};
 
             return workChangeState;
 
@@ -32,6 +38,13 @@ export default (state = initialState, action) => {
             restChangeState.restSessionTime.time = {...action.payload};
 
             return restChangeState;
+
+        case COUNTDOWN:
+            let countdownState = {...state};
+            countdownState.countdown = {...action.payload};
+            countdownState.isSetTimeActive = false;
+
+            return countdownState;
 
         default:
             return state;
