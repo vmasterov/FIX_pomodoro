@@ -49,6 +49,7 @@
     .Timer {
         position: static;
         margin-top: 30px;
+        padding-bottom: 0;
     }
 
 
