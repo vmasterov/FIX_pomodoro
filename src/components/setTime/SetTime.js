@@ -27,7 +27,6 @@ class SetTime extends Component {
             <div className={'SetTime SetTime--' + this.props.type + (this.props.data.isSetTimeActive ? '' : ' is-disabled')}>
                 <div className="SetTime-caption">{this.props.caption}</div>
                 <div className="SetTime-wrapper">
-                    <div className="SetTime-time">{beautyTime(this.props.data[this.props.type].time)}</div>
                     <div className="SetTime-buttonContainer">
                         <button
                             className="SetTime-button SetTime-button-more"
@@ -52,6 +51,7 @@ class SetTime extends Component {
                             &#9660;
                         </button>
                     </div>
+                    <div className="SetTime-time">{this.props.data[this.props.type].time.min}</div>
                 </div>
             </div>
         );
