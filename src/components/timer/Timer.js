@@ -4,8 +4,10 @@ import Button from "../button/Button";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {setTimer, beautyTime} from "../../services/helpers/timeModule";
-import {timerDictionary} from "../../services/helpers/timerDictionary";
+import {timerDictionary} from "./timerDictionary";
 import {resetTimer, startCountdown, toggleStartButton} from "../../services/setTime/action";
+import FinishMessage from "../finishMessage/FinishMessage";
+import {interval} from "./interval";
 
 class Timer extends Component {
     constructor(props) {
@@ -17,41 +19,15 @@ class Timer extends Component {
 
     toggleTimer(event) {
         event.preventDefault();
-
         if (this.props.isStartButton) {
             this.props.toggleStartButton(false);
 
-            let countdown = {...this.props.countdown};
-            let restTime = {...this.props.restTime};
-
             this.props.startCountdown({
-                time: setTimer(countdown, false),
+                time: setTimer(this.props.countdown, false),
                 isWorkSession: this.props.isWorkSession
             });
 
-            this.intervalID = setInterval(() => {
-                if (countdown.min === 0 && countdown.sec === 0) {
-                    if (!this.props.isWorkSession) {
-                        return;
-                    }
-
-                    this.props.startCountdown({
-                        time: setTimer(restTime, false),
-                        isWorkSession: false
-                    });
-
-                    countdown = {...this.props.countdown};
-                } else {
-                    this.props.startCountdown({
-                        time: setTimer(countdown, false),
-                        isWorkSession: this.props.isWorkSession
-                    });
-
-                    if (countdown.min === 0 && countdown.sec === 0 && !this.props.isWorkSession) {
-                        console.log('The Loop is finished', countdown);
-                    }
-                }
-            }, 1000);
+            this.intervalID = setInterval(interval.bind(this), 1000);
         } else {
             clearInterval(this.intervalID);
 
@@ -74,37 +50,41 @@ class Timer extends Component {
 
     render() {
         return (
-            <div className="Timer">
-                <div className="Timer-caption">
-                    {
-                        this.props.isWorkSession
-                            ?
-                            timerDictionary.caption[0]
-                            :
-                            timerDictionary.caption[1]
-                    }
-                </div>
-                <div className="Timer-time">{beautyTime(this.props.countdown)}</div>
-                <div className="Timer-buttonWrapper">
-                    <Button
-                        name={(
-                            this.props.isStartButton
+            (this.props.countdown.min === 0 && this.props.countdown.sec === 0 && !this.props.isWorkSession)
+                ?
+                <FinishMessage reset={this.resetTimer}/>
+                :
+                <div className="Timer">
+                    <div className="Timer-caption">
+                        {
+                            this.props.isWorkSession
                                 ?
-                                timerDictionary.buttons.start[0]
+                                timerDictionary.caption[0]
                                 :
-                                timerDictionary.buttons.start[1]
-                        )}
-                        type="start"
-                        click={this.toggleTimer}
-                        isStarted={this.props.isStartButton}
-                    />
-                    <Button
-                        name={timerDictionary.buttons.reset[0]}
-                        type="reset"
-                        click={this.resetTimer}
-                    />
+                                timerDictionary.caption[1]
+                        }
+                    </div>
+                    <div className="Timer-time">{beautyTime(this.props.countdown)}</div>
+                    <div className="Timer-buttonWrapper">
+                        <Button
+                            name={(
+                                this.props.isStartButton
+                                    ?
+                                    timerDictionary.buttons.start[0]
+                                    :
+                                    timerDictionary.buttons.start[1]
+                            )}
+                            type="start"
+                            click={this.toggleTimer}
+                            isStarted={this.props.isStartButton}
+                        />
+                        <Button
+                            name={timerDictionary.buttons.reset[0]}
+                            type="reset"
+                            click={this.resetTimer}
+                        />
+                    </div>
                 </div>
-            </div>
         );
     }
 }

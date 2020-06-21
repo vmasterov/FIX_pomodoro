@@ -1,0 +1,50 @@
+.FinishMessage{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.FinishMessage-caption {
+    margin-bottom: 50px;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.FinishMessage-button {
+    width: 300px;
+    font-size: 30px;
+    font-weight: 600;
+    height: 70px;
+}
+
+@media (max-width: 1199px) {
+    .FinishMessage-caption {
+        margin-bottom: 30px;
+        font-size: 30px;
+    }
+
+    .FinishMessage-button {
+        width: 200px;
+        font-size: 20px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .FinishMessage-caption {
+        margin-bottom: 20px;
+        padding: 0 10px;
+        font-size: 25px;
+    }
+
+    .FinishMessage-button {
+        width: 300px;
+        font-size: 18px;
+        height: 40px;
+    }
+}

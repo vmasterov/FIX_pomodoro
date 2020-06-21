@@ -11,15 +11,15 @@ const initialState = {
     },
     restSessionTime: {
         time: {
-            min: 0,
-            sec: 5
+            min: 5,
+            sec: 0
         },
         mini: 0,
         maxi: 10
     },
     countdown: {
-        min: 0,
-        sec: 3
+        min: 15,
+        sec: 0
     },
     isWorkSession: true,
     isSetTimeActive: true,

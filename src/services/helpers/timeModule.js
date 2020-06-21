@@ -1,4 +1,6 @@
-export const setTimer = (time, isPlus = true) => {
+export const setTimer = (stateTime, isPlus = true) => {
+    let time = {...stateTime};
+
     if (time.min === 0 && time.sec === 0) {
         return time;
     }
